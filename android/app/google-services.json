@@ -1,0 +1,154 @@
+{
+  "project_info": {
+    "project_number": "401633629557",
+    "project_id": "taag-36265",
+    "storage_bucket": "taag-36265.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401633629557:android:ba9fb2d7c172d0f3232f3c",
+        "android_client_info": {
+          "package_name": "com.admin_taag.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401633629557-k3sr1mdm717fh4e8cs33chgvm5s50l6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBlwUVnfTY4KNPiouP2uBrZGJjPi183J4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401633629557-k3sr1mdm717fh4e8cs33chgvm5s50l6q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "401633629557-es3165lgsskstpk95ikqmrjglhqpup96.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.taag"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401633629557:android:ae0d3e6e3d5c5c74232f3c",
+        "android_client_info": {
+          "package_name": "com.example.admin_taag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401633629557-k3sr1mdm717fh4e8cs33chgvm5s50l6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBlwUVnfTY4KNPiouP2uBrZGJjPi183J4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401633629557-k3sr1mdm717fh4e8cs33chgvm5s50l6q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "401633629557-es3165lgsskstpk95ikqmrjglhqpup96.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.taag"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401633629557:android:bf48f9467dd0ae39232f3c",
+        "android_client_info": {
+          "package_name": "com.example.taa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401633629557-k3sr1mdm717fh4e8cs33chgvm5s50l6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBlwUVnfTY4KNPiouP2uBrZGJjPi183J4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401633629557-k3sr1mdm717fh4e8cs33chgvm5s50l6q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "401633629557-es3165lgsskstpk95ikqmrjglhqpup96.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.taag"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401633629557:android:c001647db182b21f232f3c",
+        "android_client_info": {
+          "package_name": "com.taag.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401633629557-k3sr1mdm717fh4e8cs33chgvm5s50l6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBlwUVnfTY4KNPiouP2uBrZGJjPi183J4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401633629557-k3sr1mdm717fh4e8cs33chgvm5s50l6q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "401633629557-es3165lgsskstpk95ikqmrjglhqpup96.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.taag"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
