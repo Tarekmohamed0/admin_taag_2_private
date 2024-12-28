@@ -1,0 +1,22 @@
+2024/12/27-20:11:22.489 8207 Reusing MANIFEST /private/var/folders/21/jst65ls13b1_hy3vlnht91mm0000gn/T/flutter_tools.qfgQjh/flutter_tools_chrome_device.7UI24W/Default/IndexedDB/http_localhost_51281.indexeddb.leveldb/MANIFEST-000001
+2024/12/27-20:11:22.489 8207 Recovering log #3
+2024/12/27-20:11:22.489 8207 Reusing old log /private/var/folders/21/jst65ls13b1_hy3vlnht91mm0000gn/T/flutter_tools.qfgQjh/flutter_tools_chrome_device.7UI24W/Default/IndexedDB/http_localhost_51281.indexeddb.leveldb/000003.log 
+2024/12/27-20:11:22.821 f803 Level-0 table #5: started
+2024/12/27-20:11:22.829 f803 Level-0 table #5: 2127 bytes OK
+2024/12/27-20:11:22.835 f803 Delete type=0 #3
+2024/12/27-20:11:22.835 a603 Manual compaction at level-0 from '\x00\x04\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x05\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/12/27-20:15:14.354 f803 Level-0 table #7: started
+2024/12/27-20:15:14.365 f803 Level-0 table #7: 655 bytes OK
+2024/12/27-20:15:14.370 f803 Delete type=0 #4
+2024/12/27-20:15:14.371 8207 Manual compaction at level-0 from '\x00\x05\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/12/27-20:16:23.027 8207 Level-0 table #9: started
+2024/12/27-20:16:23.030 8207 Level-0 table #9: 661 bytes OK
+2024/12/27-20:16:23.035 8207 Delete type=0 #6
+2024/12/27-20:16:23.036 8207 Manual compaction at level-0 from '\x00\x06\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at '\x00\x06\x00\x00\x05' @ 135 : 1
+2024/12/27-20:16:23.036 8207 Compacting 1@0 + 1@1 files
+2024/12/27-20:16:23.039 8207 Generated table #10@0: 13 keys, 651 bytes
+2024/12/27-20:16:23.039 8207 Compacted 1@0 + 1@1 files => 651 bytes
+2024/12/27-20:16:23.043 8207 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/12/27-20:16:23.044 8207 Delete type=2 #9
+2024/12/27-20:16:23.044 8207 Manual compaction at level-0 from '\x00\x06\x00\x00\x05' @ 135 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/12/27-20:20:09.901 b103 Manual compaction at level-0 from '\x00\x07\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x08\x00\x00\x00' @ 0 : 0; will stop at (end)

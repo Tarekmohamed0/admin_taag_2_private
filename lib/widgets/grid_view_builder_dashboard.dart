@@ -1,12 +1,16 @@
 import 'dart:developer';
 
+import 'package:admin_taag/features/payment_chart/presentation/cubit/payment_chart_cubit.dart';
 import 'package:admin_taag/view/annuncement_view.dart';
 import 'package:admin_taag/view/customer_view.dart';
 import 'package:admin_taag/view/notification_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../features/create_clinics/presentation/pages/add_doctor_to_clinics.dart';
 import '../features/create_clinics/presentation/pages/create_clinics.dart';
+import '../features/payment_chart/presentation/pages/payment_chart.dart';
+import '../view/ revenu.dart';
 
 class GridViewBuilderWidget extends StatelessWidget {
   const GridViewBuilderWidget({super.key});
@@ -43,6 +47,30 @@ class GridViewBuilderWidget extends StatelessWidget {
                 ),
               );
             }
+            if (index == 2) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return BlocProvider(
+                      create: (context) => PaymentCubit(),
+                      child: const PaymentChartScreen(),
+                    );
+                  },
+                ),
+              );
+            }
+            if (index == 3) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return BlocProvider(
+                      create: (context) => PaymentCubit(),
+                      child: const RevenueChartScreen(),
+                    );
+                  },
+                ),
+              );
+            }
             if (index == 4) {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -56,7 +84,7 @@ class GridViewBuilderWidget extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return CreateClinics();
+                    return const CreateClinics();
                   },
                 ),
               );
