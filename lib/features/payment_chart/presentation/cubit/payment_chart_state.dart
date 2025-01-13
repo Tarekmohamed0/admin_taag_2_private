@@ -9,6 +9,12 @@ final class PaymentLoading extends PaymentState {}
 
 final class PaymentSuccess extends PaymentState {}
 
+final class paymentdata extends PaymentState {
+  final dynamic clinics;
+
+  paymentdata(this.clinics);
+}
+
 final class PaymentFailure extends PaymentState {
   final String errorMessage;
 

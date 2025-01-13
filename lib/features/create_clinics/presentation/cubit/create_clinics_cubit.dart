@@ -8,7 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../data/sources/create_clinec_data_source.dart';
 
 class CreateClinicsCubit extends Cubit<CreateClinicsState> {
-  CreateClinicsCubit() : super(CreateClinicsState.initial());
+  CreateClinicsCubit() : super(const CreateClinicsState.initial());
 
   final TextEditingController clinicNameController = TextEditingController();
   final TextEditingController clinicAddressController = TextEditingController();
@@ -17,37 +17,43 @@ class CreateClinicsCubit extends Cubit<CreateClinicsState> {
   final TextEditingController clinicDescriptionController =
       TextEditingController();
 
+  final TextEditingController clinicPriceOrder = TextEditingController();
+  final TextEditingController clinicDiscountOrder = TextEditingController();
+
   Future<void> createClinic({
     required String clinicName,
     required String clinicAddress,
     required String clinicPhone,
     required String clinicDescription,
     required List<DateModel> date,
+    required String clinicPriceOrder,
+    required String clinicDiscountOrder,
   }) async {
-    emit(CreateClinicsState.loading());
+    emit(const CreateClinicsState.loading());
     try {
       await CreateClinecDataSource().createClinic(
-        clinicName,
-        clinicAddress,
-        clinicPhone,
-        clinicDescription,
-        date,
-      );
-      emit(CreateClinicsState.created());
+          clinicName,
+          clinicAddress,
+          clinicPhone,
+          clinicDescription,
+          date,
+          clinicPriceOrder,
+          clinicDiscountOrder);
+      emit(const CreateClinicsState.created());
     } catch (e) {
-      emit(CreateClinicsState.error());
+      emit(const CreateClinicsState.error());
     }
   }
 
   // fetch the clinic data from firestore
   Future<List<Map<String, dynamic>>> fetchClinicData() async {
-    emit(CreateClinicsState.loading());
+    emit(const CreateClinicsState.loading());
     try {
       final data = await CreateClinecDataSource().fetchClinicData();
       emit(CreateClinicsState.loaded(data));
       return data;
     } on FirebaseFirestore catch (e) {
-      emit(CreateClinicsState.error());
+      emit(const CreateClinicsState.error());
       return [];
     }
   }

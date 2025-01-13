@@ -4,10 +4,11 @@ import 'dart:typed_data';
 import 'dart:html' as html;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart'; 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart'; 
+import 'package:path/path.dart';
 
 class AnnuncementView extends StatefulWidget {
   const AnnuncementView({super.key});
@@ -22,71 +23,75 @@ class _AnnuncementViewState extends State<AnnuncementView> {
   bool isImageSelected = false;
   final ImagePicker _picker = ImagePicker();
 
-  // Function to pick image on Web
-  Future<void> _pickImageWeb() async {
-    final html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
-    uploadInput.accept = 'image/*';
-    uploadInput.click();
+  // // Function to pick image on Web
+  // Future<void> _pickImageWeb() async {
+  //   final html.FileUploadInputElement uploadInput =
+  //       html.FileUploadInputElement();
+  //   uploadInput.accept = 'image/*';
+  //   uploadInput.click();
 
-    uploadInput.onChange.listen((event) async {
-      final html.File? file = uploadInput.files?.first;
-      if (file != null) {
-        final reader = html.FileReader();
-        reader.readAsArrayBuffer(file);
-        reader.onLoadEnd.listen((event) async {
-          final Uint8List fileBytes = reader.result as Uint8List;
-          final String fileName = '${DateTime.now().millisecondsSinceEpoch}${_getFileExtension(file.name)}';
+  //   uploadInput.onChange.listen((event) async {
+  //     final html.File? file = uploadInput.files?.first;
+  //     if (file != null) {
+  //       final reader = html.FileReader();
+  //       reader.readAsArrayBuffer(file);
+  //       reader.onLoadEnd.listen((event) async {
+  //         final Uint8List fileBytes = reader.result as Uint8List;
+  //         final String fileName =
+  //             '${DateTime.now().millisecondsSinceEpoch}${_getFileExtension(file.name)}';
 
-          setState(() => isLoading = true);
+  //         setState(() => isLoading = true);
 
-          try {
-            final String downloadUrl = await _uploadBytesToStorage(fileBytes, fileName);
-            await _saveImageUrlToFirestore(downloadUrl);
-            setState(() {
-              _uploadedImageUrl = downloadUrl;
-              isLoading = false;
-              isImageSelected = true;
-            });
-            log('Image uploaded successfully: $downloadUrl');
-          } catch (e) {
-            log('Error uploading image: $e');
-            setState(() => isLoading = false);
-          }
-        });
-      }
-    });
-  }
+  //         try {
+  //           final String downloadUrl =
+  //               await _uploadBytesToStorage(fileBytes, fileName);
+  //           await _saveImageUrlToFirestore(downloadUrl);
+  //           setState(() {
+  //             _uploadedImageUrl = downloadUrl;
+  //             isLoading = false;
+  //             isImageSelected = true;
+  //           });
+  //           log('Image uploaded successfully: $downloadUrl');
+  //         } catch (e) {
+  //           log('Error uploading image: $e');
+  //           setState(() => isLoading = false);
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 
-  // Function to pick image on Mobile/Desktop
-  Future<void> _pickImageNative(ImageSource source) async {
-    final XFile? image = await _picker.pickImage(source: source);
-    if (image != null) {
-      setState(() {
-        isImageSelected = true;
-        isLoading = true;
-      });
+  // // Function to pick image on Mobile/Desktop
+  // Future<void> _pickImageNative(ImageSource source) async {
+  //   final XFile? image = await _picker.pickImage(source: source);
+  //   if (image != null) {
+  //     setState(() {
+  //       isImageSelected = true;
+  //       isLoading = true;
+  //     });
 
-      final File file = File(image.path);
-      final String fileName = '${DateTime.now().millisecondsSinceEpoch}${_getFileExtension(file.path)}';
+  //     final File file = File(image.path);
+  //     final String fileName =
+  //         '${DateTime.now().millisecondsSinceEpoch}${_getFileExtension(file.path)}';
 
-      try {
-        final String downloadUrl = await _uploadFileToStorage(file, fileName);
-        await _saveImageUrlToFirestore(downloadUrl);
-        setState(() {
-          _uploadedImageUrl = downloadUrl;
-          isLoading = false;
-        });
-        log('Image uploaded successfully: $downloadUrl');
-      } catch (e) {
-        log('Error uploading image: $e');
-        setState(() => isLoading = false);
-      }
-    } else {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   const SnackBar(content: Text('No image selected')),
-      // );
-    }
-  }
+  //     try {
+  //       final String downloadUrl = await _uploadFileToStorage(file, fileName);
+  //       await _saveImageUrlToFirestore(downloadUrl);
+  //       setState(() {
+  //         _uploadedImageUrl = downloadUrl;
+  //         isLoading = false;
+  //       });
+  //       log('Image uploaded successfully: $downloadUrl');
+  //     } catch (e) {
+  //       log('Error uploading image: $e');
+  //       setState(() => isLoading = false);
+  //     }
+  //   } else {
+  //     // ScaffoldMessenger.of(context).showSnackBar(
+  //     //   const SnackBar(content: Text('No image selected')),
+  //     // );
+  //   }
+  // }
 
   // Function to get file extension
   String _getFileExtension(String filePath) {
@@ -156,6 +161,9 @@ class _AnnuncementViewState extends State<AnnuncementView> {
     }
   }
 
+  Uint8List? _webImageBytes;
+  File? _nativeImageFile;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -171,6 +179,7 @@ class _AnnuncementViewState extends State<AnnuncementView> {
               onTap: () => _showImagePickerOptions(context),
               child: Container(
                 width: MediaQuery.of(context).size.width - 80,
+                height: 300, // لضبط ارتفاع الصورة
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey[200],
@@ -178,38 +187,128 @@ class _AnnuncementViewState extends State<AnnuncementView> {
                 ),
                 child: isLoading
                     ? const Center(child: CircularProgressIndicator())
-                    : isImageSelected
-                        ? Image.network(
-                            _uploadedImageUrl,
-                            fit: BoxFit.cover,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) {
-                                return child;
-                              } else {
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes != null
-                                        ? loadingProgress.cumulativeBytesLoaded /
-                                            (loadingProgress.expectedTotalBytes ?? 1)
-                                        : null,
-                                  ),
-                                );
-                              }
-                            },
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Icon(
-                                Icons.error,
-                                size: 100,
-                                color: Colors.red,
-                              );
-                            },
+                    : _webImageBytes != null
+                        ? Image.memory(
+                            _webImageBytes!,
+                            height: 200,
+                            width: 200,
                           )
-                        : const Icon(Icons.image_outlined, size: 180),
+                        : _nativeImageFile != null
+                            ? Image.file(
+                                _nativeImageFile!,
+                                height: 200,
+                                width: 200,
+                              )
+                            : _uploadedImageUrl.isNotEmpty
+                                ? Image.network(
+                                    _uploadedImageUrl,
+                                    height: 200,
+                                    width: 200,
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress == null) {
+                                        return child;
+                                      } else {
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: loadingProgress
+                                                        .expectedTotalBytes !=
+                                                    null
+                                                ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                    (loadingProgress
+                                                            .expectedTotalBytes ??
+                                                        1)
+                                                : null,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Center(
+                                        child: FaIcon(
+                                            FontAwesomeIcons.circleCheck,
+                                            size: 180,
+                                            color: Colors.red),
+                                      );
+                                    },
+                                  )
+                                : const Icon(Icons.image_outlined, size: 180),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+// تعديل على _pickImageWeb
+  Future<void> _pickImageWeb() async {
+    final html.FileUploadInputElement uploadInput =
+        html.FileUploadInputElement();
+    uploadInput.accept = 'image/*';
+    uploadInput.click();
+
+    uploadInput.onChange.listen((event) async {
+      final html.File? file = uploadInput.files?.first;
+      if (file != null) {
+        final reader = html.FileReader();
+        reader.readAsArrayBuffer(file);
+        reader.onLoadEnd.listen((event) async {
+          final Uint8List fileBytes = reader.result as Uint8List;
+          setState(() {
+            _webImageBytes = fileBytes;
+          });
+
+          final String fileName =
+              '${DateTime.now().millisecondsSinceEpoch}${_getFileExtension(file.name)}';
+
+          setState(() => isLoading = true);
+
+          try {
+            final String downloadUrl =
+                await _uploadBytesToStorage(fileBytes, fileName);
+            await _saveImageUrlToFirestore(downloadUrl);
+            setState(() {
+              _uploadedImageUrl = downloadUrl;
+              isLoading = false;
+            });
+            log('Image uploaded successfully: $downloadUrl');
+          } catch (e) {
+            log('Error uploading image: $e');
+            setState(() => isLoading = false);
+          }
+        });
+      }
+    });
+  }
+
+// تعديل على _pickImageNative
+  Future<void> _pickImageNative(ImageSource source) async {
+    final XFile? image = await _picker.pickImage(source: source);
+    if (image != null) {
+      setState(() {
+        _nativeImageFile = File(image.path);
+      });
+
+      final File file = File(image.path);
+      final String fileName =
+          '${DateTime.now().millisecondsSinceEpoch}${_getFileExtension(file.path)}';
+
+      setState(() => isLoading = true);
+
+      try {
+        final String downloadUrl = await _uploadFileToStorage(file, fileName);
+        await _saveImageUrlToFirestore(downloadUrl);
+        setState(() {
+          _uploadedImageUrl = downloadUrl;
+          isLoading = false;
+        });
+        log('Image uploaded successfully: $downloadUrl');
+      } catch (e) {
+        log('Error uploading image: $e');
+        setState(() => isLoading = false);
+      }
+    }
   }
 }

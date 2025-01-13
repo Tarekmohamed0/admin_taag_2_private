@@ -50,11 +50,66 @@ class _PaymentChartScreenState extends State<PaymentChartScreen> {
                 child: Column(
                   children: [
                     ...cubit.paymentsList.map((e) {
-                      return Card(
-                        child: ListTile(
-                          title: Text(e['price']),
-                          subtitle: Text(e['date']),
-                          trailing: const Icon(Icons.attach_money_outlined),
+                      return Container(
+                        alignment: Alignment.center,
+                        height: 100,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "customerName: ${e['customerName']}",
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "price: ${e['price']}\$",
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                              e['clinicName'] != null
+                                  ? Text(
+                                      "clinicName: ${e['clinicName']}",
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Container(),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "orderId: ${e['orderId']}",
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "date: ${e['date']}",
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }),

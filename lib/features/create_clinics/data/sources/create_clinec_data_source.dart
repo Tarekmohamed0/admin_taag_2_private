@@ -2,7 +2,7 @@ import 'package:admin_taag/features/create_clinics/data/models/date_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CreateClinecDataSource {
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> createClinic(
     String clinicName,
@@ -10,6 +10,8 @@ class CreateClinecDataSource {
     String clinicPhone,
     String clinicDescription,
     List<DateModel> date,
+    String clinicPriceOrder,
+    String clinicDiscountOrder,
   ) async {
     try {
       final data = await _firestore.collection('clinics').add({
@@ -17,6 +19,8 @@ class CreateClinecDataSource {
         'clinicAddress': clinicAddress,
         'clinicPhone': clinicPhone,
         'clinicDescription': clinicDescription,
+        'clinicPriceOrder': clinicPriceOrder,
+        'clinicDiscountOrder': clinicDiscountOrder,
         'date': date.map((e) => e.DateModeltoJson()).toList(),
       });
       // print(data.get());
@@ -30,7 +34,7 @@ class CreateClinecDataSource {
     try {
       final data = await _firestore.collection('clinics').get();
       print(data);
-      return data.docs.map((e) => e.data() as Map<String, dynamic>).toList();
+      return data.docs.map((e) => e.data()).toList();
     } on FirebaseFirestore catch (e) {
       print(e.toString());
       return [];

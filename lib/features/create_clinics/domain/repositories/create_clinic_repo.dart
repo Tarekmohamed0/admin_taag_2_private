@@ -8,5 +8,7 @@ abstract class CreateClinicRepo {
     required String clinicPhone,
     required String clinicDescription,
     required dynamic date,
+    required String clinicDiscountOrder,
+    required String clinicPriceOrder,
   });
 }

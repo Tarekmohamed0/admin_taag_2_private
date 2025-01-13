@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/date_model.dart';
 
 class CreateClinics extends StatefulWidget {
-  const CreateClinics({Key? key}) : super(key: key);
+  const CreateClinics({super.key});
 
   @override
   State<CreateClinics> createState() => _CreateClinicsState();
@@ -140,6 +140,39 @@ class _CreateClinicsState extends State<CreateClinics> {
                         hintText: 'Enter Clinic Description',
                       ),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller:
+                          context.read<CreateClinicsCubit>().clinicPriceOrder,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(),
+                        ),
+                        filled: true,
+                        labelText: 'Clinic price for order',
+                        hintText: 'Enter Clinic price',
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: context
+                          .read<CreateClinicsCubit>()
+                          .clinicDiscountOrder,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(),
+                        ),
+                        filled: true,
+                        labelText: 'Clinic descount ',
+                        hintText: 'Enter Clinic descount',
+                      ),
+                    ),
                     const SizedBox(height: 20),
                     DropdownButtonFormField<String>(
                       value: selectedDay,
@@ -187,9 +220,9 @@ class _CreateClinicsState extends State<CreateClinics> {
                       child: const Text('Add Schedule'),
                     ),
                     const SizedBox(height: 20),
-                    Text(
+                    const Text(
                       'Selected Schedule:',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     ListView.builder(
                       shrinkWrap: true,
@@ -226,6 +259,14 @@ class _CreateClinicsState extends State<CreateClinics> {
                                   .clinicDescriptionController
                                   .text,
                               date: clinicSchedule,
+                              clinicDiscountOrder: context
+                                  .read<CreateClinicsCubit>()
+                                  .clinicDiscountOrder
+                                  .text,
+                              clinicPriceOrder: context
+                                  .read<CreateClinicsCubit>()
+                                  .clinicPriceOrder
+                                  .text,
                             );
                         print(clinicSchedule);
                       },

@@ -13,6 +13,8 @@ class CreateClinicUscase {
     required String clinicAddress,
     required String clinicPhone,
     required String clinicDescription,
+    required String clinicDiscountOrder,
+    required String clinicPriceOrder,
     required dynamic date,
   }) async {
     return await repository.createClinic(
@@ -20,6 +22,8 @@ class CreateClinicUscase {
         clinicAddress: clinicAddress,
         clinicPhone: clinicPhone,
         clinicDescription: clinicDescription,
+        clinicDiscountOrder: clinicDiscountOrder,
+        clinicPriceOrder: clinicPriceOrder,
         date: date);
   }
 }

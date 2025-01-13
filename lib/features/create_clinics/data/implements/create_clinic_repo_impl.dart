@@ -10,11 +10,20 @@ class CreateClinicRepoImpl extends CreateClinicRepo {
       {required String clinicName,
       required String clinicAddress,
       required String clinicPhone,
+      required String clinicPriceOrder,
       required String clinicDescription,
+      required String clinicDiscountOrder,
       required date}) async {
     try {
       final data = await CreateClinecDataSource().createClinic(
-          clinicName, clinicAddress, clinicPhone, clinicDescription, date);
+        clinicName,
+        clinicAddress,
+        clinicPhone,
+        clinicDescription,
+        date,
+        clinicPriceOrder,
+        clinicDiscountOrder,
+      );
       return Right(data);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
